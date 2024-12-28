@@ -23,11 +23,12 @@
       </div>
       <div class="px-6">
         <Button
-          label="Discord Login (Soon)"
-          :disabled="true"
+          label="Discord Login" 
+          :disabled="false"
           icon="pi pi-discord"
           class="w-full"
           severity="info"
+          @click="handleDiscordLogin"
         />
       </div>
 
@@ -43,6 +44,21 @@
 <script lang="ts" setup>
 import { RouterLink } from "vue-router";
 import Button from "primevue/button";
+</script>
+
+<script lang="ts" setup>
+import { RouterLink } from "vue-router";
+import Button from "primevue/button";
+
+const handleDiscordLogin = () => {
+  const DISCORD_CLIENT_ID = "1141411530764734615";
+  const REDIRECT_URI = "http://localhost:8000/auth/discord/callback";
+  const SCOPE = "identify email";
+  
+  const url = `https://discord.com/api/oauth2/authorize?client_id=${DISCORD_CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=code&scope=${SCOPE}`;
+  
+  window.location.href = url;
+};
 </script>
 
 <style>
